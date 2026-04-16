@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고객 UX 흐름 - 의사랑 상담 채팅</title>
+<style>
+  body { margin: 0; padding: 40px; background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  h2 { color: #c9d1d9; margin-bottom: 4px; }
+  .subtitle { color: #8b949e; margin-top: 0; }
+  .mockup { border: 1px solid #30363d; border-radius: 12px; overflow: hidden; margin: 20px 0; }
+  .mockup-header { background: #161b22; padding: 10px 16px; color: #8b949e; font-size: 13px; border-bottom: 1px solid #30363d; }
+  .mockup-body { padding: 24px; background: #0d1117; }
+</style>
+</head>
+<body>
+<h2>고객 측 UX 흐름 (최종)</h2>
+<p class="subtitle">챗봇 대화 맥락 전달 + 오프라인 모드 포함</p>
+
+<div class="mockup">
+  <div class="mockup-header">최종 고객 화면 흐름</div>
+  <div class="mockup-body">
+    <svg viewBox="0 0 960 880" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:960px;margin:0 auto;display:block;">
+      <rect x="20" y="20" width="220" height="250" rx="14" fill="#1a2332" stroke="#58a6ff" stroke-width="2"/>
+      <rect x="20" y="20" width="220" height="36" rx="14" fill="#58a6ff"/>
+      <rect x="20" y="42" width="220" height="14" fill="#58a6ff"/>
+      <text x="130" y="44" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">바로바로 챗봇</text>
+      <rect x="36" y="72" width="130" height="26" rx="10" fill="#2d333b"/>
+      <text x="101" y="90" text-anchor="middle" fill="#c9d1d9" font-size="10">처방전 출력이 안돼요</text>
+      <rect x="100" y="106" width="124" height="26" rx="10" fill="#1f6feb"/>
+      <text x="162" y="124" text-anchor="middle" fill="#fff" font-size="10">프린터 설정을 확인...</text>
+      <rect x="36" y="140" width="110" height="26" rx="10" fill="#2d333b"/>
+      <text x="91" y="158" text-anchor="middle" fill="#c9d1d9" font-size="10">그래도 안 돼요</text>
+      <rect x="45" y="185" width="170" height="36" rx="8" fill="#da3633"/>
+      <text x="130" y="208" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">💬 상담사 연결</text>
+      <text x="130" y="258" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="bold">① 챗봇 대화 중</text>
+      <line x1="240" y1="145" x2="270" y2="145" stroke="#f0883e" stroke-width="2" marker-end="url(#ao)"/>
+      <rect x="270" y="20" width="220" height="250" rx="14" fill="#1a2332" stroke="#f0883e" stroke-width="2.5"/>
+      <rect x="270" y="20" width="220" height="36" rx="14" fill="#f0883e"/>
+      <rect x="270" y="42" width="220" height="14" fill="#f0883e"/>
+      <text x="380" y="44" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">문의 유형 선택</text>
+      <text x="380" y="78" text-anchor="middle" fill="#c9d1d9" font-size="11">어떤 문제로 상담을 원하시나요?</text>
+      <rect x="290" y="92" width="180" height="30" rx="6" fill="#0d1117" stroke="#f0883e" stroke-width="1.5"/>
+      <text x="380" y="112" text-anchor="middle" fill="#f0883e" font-size="11">🔧 설치 / 환경설정</text>
+      <rect x="290" y="128" width="180" height="30" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="380" y="148" text-anchor="middle" fill="#c9d1d9" font-size="11">🐛 오류 / 장애</text>
+      <rect x="290" y="164" width="180" height="30" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="380" y="184" text-anchor="middle" fill="#c9d1d9" font-size="11">📖 기능 사용 문의</text>
+      <rect x="290" y="200" width="180" height="30" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="380" y="220" text-anchor="middle" fill="#c9d1d9" font-size="11">💬 기타</text>
+      <text x="380" y="258" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">② 사전 정보 수집 🆕</text>
+      <line x1="490" y1="145" x2="520" y2="145" stroke="#d29922" stroke-width="2" marker-end="url(#ay)"/>
+      <rect x="520" y="20" width="220" height="250" rx="14" fill="#1a2332" stroke="#d29922" stroke-width="2"/>
+      <rect x="520" y="20" width="220" height="36" rx="14" fill="#d29922"/>
+      <rect x="520" y="42" width="220" height="14" fill="#d29922"/>
+      <text x="630" y="44" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">상담사 연결 중</text>
+      <circle cx="630" cy="100" r="22" fill="none" stroke="#d29922" stroke-width="2.5" stroke-dasharray="12,6"/>
+      <text x="630" y="106" text-anchor="middle" fill="#d29922" font-size="16">⏳</text>
+      <text x="630" y="142" text-anchor="middle" fill="#c9d1d9" font-size="12">상담사를 연결하고 있습니다</text>
+      <text x="630" y="160" text-anchor="middle" fill="#8b949e" font-size="10">대기 순서: 3번째</text>
+      <rect x="538" y="178" width="184" height="52" rx="6" fill="#0d1117" stroke="#d29922" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="630" y="196" text-anchor="middle" fill="#d29922" font-size="9">📋 백그라운드에서 전달 중:</text>
+      <text x="630" y="210" text-anchor="middle" fill="#8b949e" font-size="9">챗봇 대화 내역 + 고객 정보 + 문의유형</text>
+      <text x="630" y="222" text-anchor="middle" fill="#8b949e" font-size="8">(상담사에게 자동 전달)</text>
+      <text x="630" y="258" text-anchor="middle" fill="#d29922" font-size="11" font-weight="bold">③ 대기 + 맥락 전달 🆕</text>
+      <line x1="740" y1="145" x2="770" y2="145" stroke="#3fb950" stroke-width="2" marker-end="url(#ag)"/>
+      <rect x="770" y="20" width="170" height="250" rx="14" fill="#1a2332" stroke="#3fb950" stroke-width="2"/>
+      <rect x="770" y="20" width="170" height="36" rx="14" fill="#3fb950"/>
+      <rect x="770" y="42" width="170" height="14" fill="#3fb950"/>
+      <text x="855" y="44" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">상담사 김영희</text>
+      <rect x="784" y="72" width="140" height="22" rx="8" fill="#2d333b"/>
+      <text x="854" y="88" text-anchor="middle" fill="#c9d1d9" font-size="9">대화 내용 확인했습니다</text>
+      <rect x="784" y="100" width="140" height="22" rx="8" fill="#2d333b"/>
+      <text x="854" y="116" text-anchor="middle" fill="#c9d1d9" font-size="9">원격 연결 도와드릴게요</text>
+      <rect x="810" y="130" width="114" height="22" rx="8" fill="#1f6feb"/>
+      <text x="867" y="146" text-anchor="middle" fill="#fff" font-size="9">네 감사합니다</text>
+      <rect x="810" y="160" width="114" height="22" rx="6" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/>
+      <text x="867" y="176" text-anchor="middle" fill="#58a6ff" font-size="9">📎 capture.png</text>
+      <rect x="784" y="195" width="105" height="24" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="836" y="212" text-anchor="middle" fill="#484f58" font-size="9">메시지 입력...</text>
+      <rect x="894" y="195" width="32" height="24" rx="6" fill="#1f6feb"/>
+      <text x="910" y="211" text-anchor="middle" fill="#fff" font-size="9">전송</text>
+      <text x="855" y="258" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">④ 실시간 채팅</text>
+      <rect x="170" y="340" width="220" height="230" rx="14" fill="#1a2332" stroke="#bc8cff" stroke-width="2"/>
+      <rect x="170" y="340" width="220" height="36" rx="14" fill="#bc8cff"/>
+      <rect x="170" y="362" width="220" height="14" fill="#bc8cff"/>
+      <text x="280" y="364" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">상담 종료</text>
+      <text x="280" y="405" text-anchor="middle" fill="#c9d1d9" font-size="12">상담이 도움이 되셨나요?</text>
+      <text x="280" y="440" text-anchor="middle" fill="#d29922" font-size="28">★ ★ ★ ★ ☆</text>
+      <rect x="200" y="465" width="160" height="36" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="280" y="487" text-anchor="middle" fill="#484f58" font-size="10">의견을 남겨주세요 (선택)</text>
+      <rect x="215" y="515" width="130" height="30" rx="8" fill="#3fb950"/>
+      <text x="280" y="535" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">제출하기</text>
+      <text x="280" y="560" text-anchor="middle" fill="#bc8cff" font-size="11" font-weight="bold">⑤ 만족도 평가</text>
+      <path d="M 855 270 Q 855 310 390 340" fill="none" stroke="#bc8cff" stroke-width="2" marker-end="url(#ap)"/>
+      <line x1="390" y1="460" x2="520" y2="460" stroke="#58a6ff" stroke-width="2" marker-end="url(#ab)"/>
+      <rect x="520" y="340" width="220" height="230" rx="14" fill="#1a2332" stroke="#58a6ff" stroke-width="2"/>
+      <rect x="520" y="340" width="220" height="36" rx="14" fill="#58a6ff"/>
+      <rect x="520" y="362" width="220" height="14" fill="#58a6ff"/>
+      <text x="630" y="364" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">바로바로 챗봇</text>
+      <text x="630" y="420" text-anchor="middle" fill="#c9d1d9" font-size="12">상담이 종료되었습니다.</text>
+      <text x="630" y="445" text-anchor="middle" fill="#8b949e" font-size="10">추가 문의는 챗봇을 이용하거나</text>
+      <text x="630" y="462" text-anchor="middle" fill="#8b949e" font-size="10">상담사 연결을 다시 요청해주세요.</text>
+      <rect x="555" y="485" width="150" height="32" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/>
+      <text x="630" y="506" text-anchor="middle" fill="#58a6ff" font-size="11">챗봇으로 돌아가기</text>
+      <text x="630" y="560" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="bold">⑥ 챗봇 복귀</text>
+      <rect x="20" y="640" width="920" height="110" rx="12" fill="#161b22" stroke="#da3633" stroke-width="1.5"/>
+      <text x="40" y="668" fill="#da3633" font-size="13" font-weight="bold">🔴 오프라인 모드 (업무 시간 외) 🆕</text>
+      <text x="40" y="692" fill="#c9d1d9" font-size="11">업무 시간 외 "상담사 연결" 클릭 시:</text>
+      <text x="40" y="714" fill="#8b949e" font-size="11">→ "현재 상담 가능 시간이 아닙니다 (평일 09:00~18:00). 메시지를 남겨주시면 영업시간에 확인 후 답변드리겠습니다."</text>
+      <text x="40" y="736" fill="#8b949e" font-size="11">→ 고객이 남긴 메시지는 Chatwoot에 대화로 생성되어, 영업시간에 상담사가 확인 후 응대</text>
+      <rect x="20" y="780" width="920" height="60" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <rect x="40" y="800" width="14" height="14" rx="3" fill="#f0883e"/>
+      <text x="60" y="812" fill="#f0883e" font-size="11">🆕 새로 추가된 단계</text>
+      <rect x="240" y="800" width="14" height="14" rx="3" fill="#3fb950"/>
+      <text x="260" y="812" fill="#c9d1d9" font-size="11">기존 흐름 유지</text>
+      <rect x="440" y="800" width="14" height="14" rx="3" fill="#da3633"/>
+      <text x="460" y="812" fill="#da3633" font-size="11">오프라인 분기</text>
+      <defs>
+        <marker id="ao" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#f0883e"/></marker>
+        <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3fb950"/></marker>
+        <marker id="ay" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#d29922"/></marker>
+        <marker id="ab" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#58a6ff"/></marker>
+        <marker id="ap" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#bc8cff"/></marker>
+        <marker id="ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#da3633"/></marker>
+      </defs>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

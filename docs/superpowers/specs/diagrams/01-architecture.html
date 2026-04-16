@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시스템 아키텍처 - 의사랑 상담 채팅</title>
+<style>
+  body { margin: 0; padding: 40px; background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  h2 { color: #c9d1d9; margin-bottom: 4px; }
+  .subtitle { color: #8b949e; margin-top: 0; }
+  .mockup { border: 1px solid #30363d; border-radius: 12px; overflow: hidden; margin: 20px 0; }
+  .mockup-header { background: #161b22; padding: 10px 16px; color: #8b949e; font-size: 13px; border-bottom: 1px solid #30363d; }
+  .mockup-body { padding: 32px; background: #0d1117; }
+</style>
+</head>
+<body>
+<h2>Chatwoot 기반 아키텍처</h2>
+<p class="subtitle">오픈소스 상담 플랫폼을 활용한 설계</p>
+
+<div class="mockup">
+  <div class="mockup-header">전체 아키텍처 (Chatwoot 기반)</div>
+  <div class="mockup-body">
+    <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;margin:0 auto;display:block;">
+      <rect x="20" y="30" width="220" height="150" rx="12" fill="#1a2332" stroke="#58a6ff" stroke-width="2"/>
+      <text x="130" y="58" text-anchor="middle" fill="#58a6ff" font-size="14" font-weight="bold">고객 (바로바로)</text>
+      <text x="130" y="82" text-anchor="middle" fill="#8b949e" font-size="12">React 웹앱 (크로미움)</text>
+      <rect x="40" y="95" width="180" height="30" rx="5" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/>
+      <text x="130" y="115" text-anchor="middle" fill="#c9d1d9" font-size="11">바로바로 챗봇 UI</text>
+      <rect x="40" y="132" width="180" height="30" rx="5" fill="#0d1117" stroke="#f0883e" stroke-width="1.5"/>
+      <text x="130" y="152" text-anchor="middle" fill="#f0883e" font-size="11">Chatwoot 위젯 (SDK)</text>
+      <rect x="310" y="10" width="280" height="220" rx="12" fill="#1a2332" stroke="#3fb950" stroke-width="2"/>
+      <text x="450" y="38" text-anchor="middle" fill="#3fb950" font-size="15" font-weight="bold">Chatwoot 서버</text>
+      <text x="450" y="56" text-anchor="middle" fill="#8b949e" font-size="11">(Docker 자체 호스팅)</text>
+      <rect x="325" y="70" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="385" y="92" text-anchor="middle" fill="#c9d1d9" font-size="11">WebSocket</text>
+      <rect x="455" y="70" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="515" y="92" text-anchor="middle" fill="#c9d1d9" font-size="11">REST API</text>
+      <rect x="325" y="115" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="385" y="137" text-anchor="middle" fill="#c9d1d9" font-size="11">자동 배정</text>
+      <rect x="455" y="115" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="515" y="137" text-anchor="middle" fill="#c9d1d9" font-size="11">대기열 관리</text>
+      <rect x="325" y="160" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="385" y="182" text-anchor="middle" fill="#c9d1d9" font-size="11">파일 저장</text>
+      <rect x="455" y="160" width="120" height="35" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="515" y="182" text-anchor="middle" fill="#c9d1d9" font-size="11">CSAT 평가</text>
+      <rect x="310" y="280" width="280" height="100" rx="12" fill="#1a2332" stroke="#d29922" stroke-width="2"/>
+      <text x="450" y="308" text-anchor="middle" fill="#d29922" font-size="14" font-weight="bold">기존 .NET 서버</text>
+      <rect x="325" y="320" width="120" height="35" rx="6" fill="#0d1117" stroke="#d29922" stroke-width="1"/>
+      <text x="385" y="342" text-anchor="middle" fill="#c9d1d9" font-size="11">고객 인증 API</text>
+      <rect x="455" y="320" width="120" height="35" rx="6" fill="#0d1117" stroke="#d29922" stroke-width="1"/>
+      <text x="515" y="342" text-anchor="middle" fill="#c9d1d9" font-size="11">Webhook 수신</text>
+      <rect x="660" y="30" width="220" height="150" rx="12" fill="#1a2332" stroke="#da3633" stroke-width="2"/>
+      <text x="770" y="58" text-anchor="middle" fill="#da3633" font-size="14" font-weight="bold">상담사</text>
+      <text x="770" y="82" text-anchor="middle" fill="#8b949e" font-size="12">웹 브라우저</text>
+      <rect x="680" y="95" width="180" height="65" rx="5" fill="#0d1117" stroke="#da3633" stroke-width="1"/>
+      <text x="770" y="118" text-anchor="middle" fill="#c9d1d9" font-size="12">Chatwoot 대시보드</text>
+      <text x="770" y="138" text-anchor="middle" fill="#8b949e" font-size="10">(내장 어드민 패널 사용)</text>
+      <rect x="80" y="280" width="160" height="80" rx="12" fill="#1a2332" stroke="#bc8cff" stroke-width="2"/>
+      <text x="160" y="310" text-anchor="middle" fill="#bc8cff" font-size="13" font-weight="bold">PostgreSQL</text>
+      <text x="160" y="330" text-anchor="middle" fill="#8b949e" font-size="11">+ Redis</text>
+      <text x="160" y="348" text-anchor="middle" fill="#8b949e" font-size="10">(Chatwoot 내장 DB)</text>
+      <line x1="240" y1="148" x2="310" y2="100" stroke="#f0883e" stroke-width="2" marker-end="url(#arrowOrange)"/>
+      <text x="275" y="112" text-anchor="middle" fill="#f0883e" font-size="10">SDK</text>
+      <line x1="590" y1="100" x2="660" y2="120" stroke="#da3633" stroke-width="2" marker-end="url(#arrowRed)"/>
+      <text x="625" y="100" text-anchor="middle" fill="#da3633" font-size="10">WebSocket</text>
+      <line x1="310" y1="200" x2="240" y2="280" stroke="#bc8cff" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+      <line x1="450" y1="230" x2="450" y2="280" stroke="#d29922" stroke-width="2" marker-end="url(#arrowYellow)"/>
+      <text x="420" y="260" text-anchor="end" fill="#d29922" font-size="10">Webhook</text>
+      <line x1="480" y1="280" x2="480" y2="230" stroke="#3fb950" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowGreen)"/>
+      <text x="510" y="260" text-anchor="start" fill="#3fb950" font-size="10">REST API</text>
+      <rect x="20" y="420" width="860" height="120" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <text x="450" y="448" text-anchor="middle" fill="#c9d1d9" font-size="13" font-weight="bold">직접 구현 vs Chatwoot 내장 기능</text>
+      <text x="40" y="475" fill="#3fb950" font-size="12" font-weight="bold">✅ Chatwoot 내장 (개발 불필요)</text>
+      <text x="40" y="495" fill="#8b949e" font-size="11">실시간 메시지, 파일첨부, 채팅이력, 자동배정, 대기열, 만족도평가, 상담사 대시보드</text>
+      <text x="40" y="522" fill="#f0883e" font-size="12" font-weight="bold">🔧 직접 개발 필요</text>
+      <text x="40" y="542" fill="#8b949e" font-size="11">바로바로 챗봇→상담사 전환 연동, 고객 인증 연결, Chatwoot 위젯 커스텀 스타일링</text>
+      <defs>
+        <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/></marker>
+        <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#da3633"/></marker>
+        <marker id="arrowYellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#d29922"/></marker>
+        <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#bc8cff"/></marker>
+        <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#3fb950"/></marker>
+        <marker id="arrowOrange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#f0883e"/></marker>
+      </defs>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

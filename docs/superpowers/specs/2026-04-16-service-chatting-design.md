@@ -1,5 +1,13 @@
 # 의사랑 상담 채팅 시스템 설계서
 
+## 다이어그램
+
+브라우저에서 HTML 파일을 열어 시각 자료를 확인할 수 있습니다.
+
+- [시스템 아키텍처](diagrams/01-architecture.html) — Chatwoot 기반 전체 구성도
+- [고객 UX 흐름](diagrams/02-customer-ux-flow.html) — 챗봇→상담사 전환 6단계 + 오프라인 모드
+- [상담사 워크플로우](diagrams/03-agent-workflow.html) — 대시보드 레이아웃 및 기능 목업
+
 ## 개요
 
 의사랑을 사용하는 고객(병원)과 본사 상담사 간의 실시간 온라인 채팅 상담 기능.

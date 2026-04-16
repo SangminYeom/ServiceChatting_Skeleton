@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상담사 워크플로우 - 의사랑 상담 채팅</title>
+<style>
+  body { margin: 0; padding: 40px; background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  h2 { color: #c9d1d9; margin-bottom: 4px; }
+  .subtitle { color: #8b949e; margin-top: 0; }
+  .mockup { border: 1px solid #30363d; border-radius: 12px; overflow: hidden; margin: 20px 0; }
+  .mockup-header { background: #161b22; padding: 10px 16px; color: #8b949e; font-size: 13px; border-bottom: 1px solid #30363d; }
+  .mockup-body { padding: 0; background: #0d1117; }
+  .section { margin-top: 20px; }
+  h3 { color: #c9d1d9; }
+</style>
+</head>
+<body>
+<h2>상담사 측 워크플로우</h2>
+<p class="subtitle">Chatwoot 대시보드 기반 상담사 경험</p>
+
+<div class="mockup">
+  <div class="mockup-header">상담사 대시보드 레이아웃</div>
+  <div class="mockup-body">
+    <svg viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:960px;margin:0 auto;display:block;">
+      <rect x="0" y="0" width="60" height="500" fill="#161b22"/>
+      <rect x="10" y="15" width="40" height="30" rx="6" fill="#1f6feb"/>
+      <text x="30" y="35" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">CW</text>
+      <rect x="14" y="60" width="32" height="32" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <text x="30" y="81" text-anchor="middle" fill="#8b949e" font-size="14">💬</text>
+      <rect x="14" y="100" width="32" height="32" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <text x="30" y="121" text-anchor="middle" fill="#8b949e" font-size="14">👥</text>
+      <rect x="14" y="140" width="32" height="32" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <text x="30" y="161" text-anchor="middle" fill="#8b949e" font-size="14">📊</text>
+      <rect x="14" y="180" width="32" height="32" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <text x="30" y="201" text-anchor="middle" fill="#8b949e" font-size="14">⚙</text>
+      <rect x="60" y="0" width="240" height="500" fill="#1a2332"/>
+      <rect x="60" y="0" width="240" height="44" fill="#161b22"/>
+      <text x="180" y="28" text-anchor="middle" fill="#c9d1d9" font-size="13" font-weight="bold">대화 목록</text>
+      <rect x="70" y="52" width="55" height="22" rx="4" fill="#1f6feb"/>
+      <text x="97" y="67" text-anchor="middle" fill="#fff" font-size="9">내 대화</text>
+      <rect x="130" y="52" width="55" height="22" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="157" y="67" text-anchor="middle" fill="#8b949e" font-size="9">대기 중</text>
+      <rect x="190" y="52" width="55" height="22" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="217" y="67" text-anchor="middle" fill="#8b949e" font-size="9">전체</text>
+      <rect x="66" y="84" width="228" height="68" rx="6" fill="#0d1117" stroke="#1f6feb" stroke-width="1.5"/>
+      <circle cx="86" cy="106" r="14" fill="#3fb950"/>
+      <text x="86" y="110" text-anchor="middle" fill="#fff" font-size="10">김</text>
+      <text x="108" y="102" fill="#c9d1d9" font-size="11" font-weight="bold">김서준 (해맑은의원)</text>
+      <rect x="230" y="92" width="50" height="16" rx="3" fill="#da3633"/>
+      <text x="255" y="103" text-anchor="middle" fill="#fff" font-size="8">오류</text>
+      <text x="108" y="118" fill="#8b949e" font-size="9">처방전 출력이 안돼요</text>
+      <text x="108" y="134" fill="#58a6ff" font-size="8">📋 챗봇 대화 3건 전달됨</text>
+      <text x="260" y="140" text-anchor="end" fill="#484f58" font-size="8">2분 전</text>
+      <rect x="66" y="160" width="228" height="68" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <circle cx="86" cy="182" r="14" fill="#d29922"/>
+      <text x="86" y="186" text-anchor="middle" fill="#fff" font-size="10">이</text>
+      <text x="108" y="178" fill="#c9d1d9" font-size="11">이민아 (행복한병원)</text>
+      <rect x="230" y="168" width="50" height="16" rx="3" fill="#f0883e"/>
+      <text x="255" y="179" text-anchor="middle" fill="#fff" font-size="8">기능</text>
+      <text x="108" y="194" fill="#8b949e" font-size="9">차트 검색이 느려요</text>
+      <text x="260" y="216" text-anchor="end" fill="#484f58" font-size="8">5분 전</text>
+      <rect x="66" y="236" width="228" height="68" rx="6" fill="#1a2332" stroke="#30363d" stroke-width="1"/>
+      <circle cx="86" cy="258" r="14" fill="#bc8cff"/>
+      <text x="86" y="262" text-anchor="middle" fill="#fff" font-size="10">박</text>
+      <text x="108" y="254" fill="#c9d1d9" font-size="11">박지은 (튼튼외과)</text>
+      <rect x="230" y="244" width="50" height="16" rx="3" fill="#3fb950"/>
+      <text x="255" y="255" text-anchor="middle" fill="#fff" font-size="8">설치</text>
+      <text x="108" y="270" fill="#8b949e" font-size="9">신규 설치 문의드립니다</text>
+      <text x="260" y="292" text-anchor="end" fill="#484f58" font-size="8">12분 전</text>
+      <rect x="66" y="320" width="228" height="40" rx="6" fill="#161b22" stroke="#d29922" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="180" y="345" text-anchor="middle" fill="#d29922" font-size="11">⏳ 대기 중: 2건</text>
+      <rect x="300" y="0" width="420" height="500" fill="#0d1117"/>
+      <rect x="300" y="0" width="420" height="44" fill="#161b22"/>
+      <circle cx="322" cy="22" r="12" fill="#3fb950"/>
+      <text x="322" y="26" text-anchor="middle" fill="#fff" font-size="9">김</text>
+      <text x="342" y="20" fill="#c9d1d9" font-size="12" font-weight="bold">김서준</text>
+      <text x="342" y="34" fill="#8b949e" font-size="9">해맑은의원 · 온라인</text>
+      <rect x="640" y="10" width="66" height="24" rx="5" fill="#3fb950"/>
+      <text x="673" y="26" text-anchor="middle" fill="#fff" font-size="9">해결 완료</text>
+      <rect x="316" y="56" width="388" height="86" rx="8" fill="#1a2332" stroke="#d29922" stroke-width="1"/>
+      <text x="326" y="74" fill="#d29922" font-size="10" font-weight="bold">📋 챗봇 대화 요약 (자동 전달)</text>
+      <text x="326" y="92" fill="#8b949e" font-size="10">문의 유형: 오류/장애</text>
+      <text x="326" y="106" fill="#8b949e" font-size="10">고객: "처방전 출력이 안돼요" → 챗봇: "프린터 설정을 확인..."</text>
+      <text x="326" y="120" fill="#8b949e" font-size="10">고객: "그래도 안 돼요" → 상담사 연결 요청</text>
+      <text x="326" y="136" fill="#484f58" font-size="9">의사랑 v3.2.1 · Windows 10 · 2026-04-16 14:30</text>
+      <rect x="316" y="155" width="240" height="28" rx="10" fill="#2d333b"/>
+      <text x="326" y="174" fill="#c9d1d9" font-size="10">대화 내용 확인했습니다. 프린터 모델이 뭔가요?</text>
+      <rect x="450" y="195" width="240" height="28" rx="10" fill="#1f6feb"/>
+      <text x="460" y="214" fill="#fff" font-size="10">삼성 SL-M2024W 입니다</text>
+      <rect x="316" y="235" width="280" height="28" rx="10" fill="#2d333b"/>
+      <text x="326" y="254" fill="#c9d1d9" font-size="10">원격 연결로 확인해보겠습니다. 잠시만요.</text>
+      <rect x="500" y="275" width="190" height="32" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/>
+      <text x="595" y="296" text-anchor="middle" fill="#58a6ff" font-size="10">📎 error_screenshot.png</text>
+      <rect x="300" y="456" width="420" height="44" fill="#161b22"/>
+      <rect x="312" y="464" width="340" height="28" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="324" y="483" fill="#484f58" font-size="10">메시지 입력...</text>
+      <rect x="660" y="464" width="48" height="28" rx="6" fill="#1f6feb"/>
+      <text x="684" y="482" text-anchor="middle" fill="#fff" font-size="10">전송</text>
+      <text x="316" y="448" fill="#8b949e" font-size="9">📎 첨부  💬 빠른답변  📝 메모</text>
+      <rect x="720" y="0" width="240" height="500" fill="#1a2332"/>
+      <rect x="720" y="0" width="240" height="44" fill="#161b22"/>
+      <text x="840" y="28" text-anchor="middle" fill="#c9d1d9" font-size="13" font-weight="bold">고객 정보</text>
+      <text x="736" y="72" fill="#8b949e" font-size="10">이름</text>
+      <text x="736" y="88" fill="#c9d1d9" font-size="11">김서준</text>
+      <text x="736" y="112" fill="#8b949e" font-size="10">병원명</text>
+      <text x="736" y="128" fill="#c9d1d9" font-size="11">해맑은의원</text>
+      <text x="736" y="152" fill="#8b949e" font-size="10">연락처</text>
+      <text x="736" y="168" fill="#c9d1d9" font-size="11">02-1234-5678</text>
+      <text x="736" y="192" fill="#8b949e" font-size="10">의사랑 버전</text>
+      <text x="736" y="208" fill="#c9d1d9" font-size="11">v3.2.1</text>
+      <text x="736" y="232" fill="#8b949e" font-size="10">OS</text>
+      <text x="736" y="248" fill="#c9d1d9" font-size="11">Windows 10</text>
+      <line x1="736" y1="264" x2="944" y2="264" stroke="#30363d" stroke-width="1"/>
+      <text x="736" y="288" fill="#8b949e" font-size="10" font-weight="bold">이전 상담</text>
+      <rect x="736" y="298" width="208" height="36" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="744" y="314" fill="#8b949e" font-size="9">2026-04-10 · 설치 문의</text>
+      <text x="744" y="328" fill="#484f58" font-size="9">상담사: 박철수 · 해결완료 ★★★★★</text>
+      <rect x="736" y="340" width="208" height="36" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+      <text x="744" y="356" fill="#8b949e" font-size="9">2026-03-22 · 기능 문의</text>
+      <text x="744" y="370" fill="#484f58" font-size="9">상담사: 김영희 · 해결완료 ★★★★☆</text>
+      <line x1="736" y1="390" x2="944" y2="390" stroke="#30363d" stroke-width="1"/>
+      <text x="736" y="414" fill="#8b949e" font-size="10" font-weight="bold">라벨</text>
+      <rect x="736" y="424" width="50" height="20" rx="4" fill="#da3633"/>
+      <text x="761" y="438" text-anchor="middle" fill="#fff" font-size="9">오류</text>
+      <rect x="792" y="424" width="60" height="20" rx="4" fill="#1f6feb"/>
+      <text x="822" y="438" text-anchor="middle" fill="#fff" font-size="9">프린터</text>
+    </svg>
+  </div>
+</div>
+
+<div class="section">
+  <h3>상담사 핵심 기능</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px;">
+      <div style="color: #d29922; font-weight: bold; margin-bottom: 6px; font-size: 13px;">📋 챗봇 맥락 자동 수신</div>
+      <div style="color: #8b949e; font-size: 12px;">대화 시작 전 챗봇 대화 내역, 문의 유형, 고객 환경 정보를 노트로 확인</div>
+    </div>
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px;">
+      <div style="color: #3fb950; font-weight: bold; margin-bottom: 6px; font-size: 13px;">💬 다중 채팅 동시 처리</div>
+      <div style="color: #8b949e; font-size: 12px;">좌측 목록에서 여러 대화를 전환하며 동시 응대 (Chatwoot 내장)</div>
+    </div>
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px;">
+      <div style="color: #58a6ff; font-weight: bold; margin-bottom: 6px; font-size: 13px;">⚡ 빠른 답변 (Canned Response)</div>
+      <div style="color: #8b949e; font-size: 12px;">자주 쓰는 답변 템플릿을 단축키로 삽입 (Chatwoot 내장)</div>
+    </div>
+    <div style="background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px;">
+      <div style="color: #bc8cff; font-weight: bold; margin-bottom: 6px; font-size: 13px;">🏷 라벨 & 분류</div>
+      <div style="color: #8b949e; font-size: 12px;">대화에 라벨을 붙여 분류, 나중에 통계/리포트에 활용</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
