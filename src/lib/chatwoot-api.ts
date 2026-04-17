@@ -66,3 +66,13 @@ export async function createConversation(
     }),
   });
 }
+
+export async function addLabel(
+  conversationId: number,
+  labels: string[]
+): Promise<void> {
+  await chatwootFetch(`/conversations/${conversationId}/labels`, {
+    method: "POST",
+    body: JSON.stringify({ labels }),
+  });
+}
