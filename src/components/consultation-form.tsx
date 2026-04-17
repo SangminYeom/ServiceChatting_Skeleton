@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Status = "idle" | "loading" | "connected" | "error";
 
@@ -22,6 +22,14 @@ export default function ConsultationForm() {
   const [inquiryType, setInquiryType] = useState("");
   const [chatHistoryInput, setChatHistoryInput] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [online, setOnline] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch("/api/consultation/status")
+      .then((res) => res.json())
+      .then((data: { online: boolean }) => setOnline(data.online))
+      .catch(() => setOnline(true));
+  }, []);
 
   const canConnect = customerName.trim() && hospitalName.trim() && inquiryType;
 
@@ -129,7 +137,13 @@ export default function ConsultationForm() {
       </div>
       <button
         onClick={handleConnect}
-        disabled={!canConnect || status === "loading" || status === "connected"}
+        disabled={
+          !canConnect ||
+          status === "loading" ||
+          status === "connected" ||
+          online === false ||
+          online === null
+        }
         className="w-full bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400"
       >
         {status === "loading" && "연결 중..."}
@@ -137,6 +151,11 @@ export default function ConsultationForm() {
         {status === "connected" && "상담 중"}
         {status === "error" && "다시 시도"}
       </button>
+      {online === false && (
+        <p className="text-amber-600 text-sm">
+          현재 상담 가능 시간이 아닙니다 (평일 09:00~18:00).
+        </p>
+      )}
       {status === "error" && (
         <p className="text-red-600 text-sm">
           상담사 연결에 실패했습니다. 다시 시도해주세요.
