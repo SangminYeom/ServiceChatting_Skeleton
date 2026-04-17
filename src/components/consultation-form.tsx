@@ -4,6 +4,11 @@ import { useState } from "react";
 
 type Status = "idle" | "loading" | "connected" | "error";
 
+type ChatMessage = {
+  role: "user" | "bot";
+  content: string;
+};
+
 const INQUIRY_TYPES = [
   { label: "사용법 문의", value: "usage" },
   { label: "오류/장애 신고", value: "error" },
@@ -15,9 +20,22 @@ export default function ConsultationForm() {
   const [customerName, setCustomerName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
   const [inquiryType, setInquiryType] = useState("");
+  const [chatHistoryInput, setChatHistoryInput] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
   const canConnect = customerName.trim() && hospitalName.trim() && inquiryType;
+
+  function parseChatHistory(): ChatMessage[] | undefined {
+    const trimmed = chatHistoryInput.trim();
+    if (!trimmed) return undefined;
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (Array.isArray(parsed)) return parsed as ChatMessage[];
+    } catch {
+      // 파싱 실패 시 무시
+    }
+    return undefined;
+  }
 
   async function handleConnect() {
     if (!canConnect) return;
@@ -25,10 +43,12 @@ export default function ConsultationForm() {
     setStatus("loading");
 
     try {
+      const chatHistory = parseChatHistory();
+
       const res = await fetch("/api/consultation/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerName, hospitalName, inquiryType }),
+        body: JSON.stringify({ customerName, hospitalName, inquiryType, chatHistory }),
       });
 
       if (!res.ok) throw new Error("API error");
@@ -94,6 +114,18 @@ export default function ConsultationForm() {
             </button>
           ))}
         </div>
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">
+          챗봇 대화 내역 <span className="text-gray-400 font-normal">(테스트용, 선택)</span>
+        </label>
+        <textarea
+          value={chatHistoryInput}
+          onChange={(e) => setChatHistoryInput(e.target.value)}
+          placeholder={'[{"role":"user","content":"안녕하세요"},{"role":"bot","content":"무엇을 도와드릴까요?"}]'}
+          className="w-full border rounded px-3 py-2 text-xs font-mono h-24 resize-none"
+          disabled={isDisabled}
+        />
       </div>
       <button
         onClick={handleConnect}
