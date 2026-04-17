@@ -42,3 +42,37 @@ export async function insertConsultationLog(
     requested_at: string;
   };
 }
+
+export async function updateConsultationStatus(
+  chatwootConversationId: number,
+  status: string,
+  resolvedAt?: Date
+): Promise<void> {
+  const sql = getDb();
+  if (resolvedAt) {
+    await sql`
+      UPDATE consultation_logs
+      SET status = ${status}, resolved_at = ${resolvedAt.toISOString()}
+      WHERE chatwoot_conversation_id = ${chatwootConversationId}
+    `;
+  } else {
+    await sql`
+      UPDATE consultation_logs
+      SET status = ${status}
+      WHERE chatwoot_conversation_id = ${chatwootConversationId}
+    `;
+  }
+}
+
+export async function saveCSAT(
+  chatwootConversationId: number,
+  rating: number,
+  comment: string | null
+): Promise<void> {
+  const sql = getDb();
+  await sql`
+    UPDATE consultation_logs
+    SET csat_rating = ${rating}, csat_comment = ${comment}
+    WHERE chatwoot_conversation_id = ${chatwootConversationId}
+  `;
+}
