@@ -13,6 +13,9 @@ function isBusinessHours(): boolean {
   return isWeekday && isWorkingTime;
 }
 
-export async function GET() {
-  return NextResponse.json({ online: isBusinessHours() });
+export function GET() {
+  return NextResponse.json(
+    { online: isBusinessHours() },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }
