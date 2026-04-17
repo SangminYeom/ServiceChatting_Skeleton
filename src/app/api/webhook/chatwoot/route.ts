@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 import { updateConsultationStatus, saveCSAT } from "@/lib/db";
 
 function verifySignature(body: string, signature: string): boolean {
-  const secret = process.env.CHATWOOT_WEBHOOK_SECRET!;
+  const secret = process.env.CHATWOOT_WEBHOOK_SECRET;
+  if (!secret) {
+    console.error("CHATWOOT_WEBHOOK_SECRET is not configured");
+    return false;
+  }
   const expected = createHmac("sha256", secret).update(body).digest("hex");
-  return expected === signature;
+  const expectedBuf = Buffer.from(expected);
+  const signatureBuf = Buffer.from(signature);
+  if (expectedBuf.length !== signatureBuf.length) return false;
+  return timingSafeEqual(expectedBuf, signatureBuf);
 }
 
 function csatRatingToNumber(rating: string): number {
@@ -16,13 +23,19 @@ function csatRatingToNumber(rating: string): number {
 
 export async function POST(request: NextRequest) {
   const body = await request.text();
-  const signature = request.headers.get("x-chatwoot-hmac-sha256") ?? "";
+  const signature = request.headers.get("x-chatwoot-hmac-sha256");
 
-  if (!verifySignature(body, signature)) {
+  if (!signature || !verifySignature(body, signature)) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
-  const payload = JSON.parse(body) as Record<string, unknown>;
+  let payload: Record<string, unknown>;
+  try {
+    payload = JSON.parse(body) as Record<string, unknown>;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
   const event = payload.event as string;
 
   try {

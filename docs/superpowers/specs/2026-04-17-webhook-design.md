@@ -29,7 +29,7 @@ Chatwoot는 Webhook 요청에 `x-chatwoot-signature` 헤더를 포함한다.
 요청 수신 시 HMAC-SHA256으로 서명을 검증하고, 불일치 시 401 반환.
 
 ```
-HMAC-SHA256(CHATWOOT_WEBHOOK_SECRET, requestBody) === x-chatwoot-signature
+HMAC-SHA256(CHATWOOT_WEBHOOK_SECRET, requestBody) === x-chatwoot-hmac-sha256
 ```
 
 ## DB 스키마 변경
