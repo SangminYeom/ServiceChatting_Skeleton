@@ -76,3 +76,17 @@ export async function addLabel(
     body: JSON.stringify({ labels }),
   });
 }
+
+export async function addConversationNote(
+  conversationId: number,
+  content: string
+): Promise<void> {
+  await chatwootFetch(`/conversations/${conversationId}/messages`, {
+    method: "POST",
+    body: JSON.stringify({
+      content,
+      message_type: "outgoing",
+      private: true,
+    }),
+  });
+}
