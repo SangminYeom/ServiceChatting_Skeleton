@@ -4,13 +4,23 @@ import { useState } from "react";
 
 type Status = "idle" | "loading" | "connected" | "error";
 
+const INQUIRY_TYPES = [
+  { label: "사용법 문의", value: "usage" },
+  { label: "오류/장애 신고", value: "error" },
+  { label: "결제 문의", value: "billing" },
+  { label: "원격 요청", value: "remote" },
+] as const;
+
 export default function ConsultationForm() {
   const [customerName, setCustomerName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
+  const [inquiryType, setInquiryType] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
+  const canConnect = customerName.trim() && hospitalName.trim() && inquiryType;
+
   async function handleConnect() {
-    if (!customerName.trim() || !hospitalName.trim()) return;
+    if (!canConnect) return;
 
     setStatus("loading");
 
@@ -18,17 +28,15 @@ export default function ConsultationForm() {
       const res = await fetch("/api/consultation/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerName, hospitalName }),
+        body: JSON.stringify({ customerName, hospitalName, inquiryType }),
       });
 
       if (!res.ok) throw new Error("API error");
 
       const data = await res.json();
 
-      // Chatwoot 위젯이 준비될 때까지 대기
       await waitForChatwoot();
 
-      // identifier로 고객 연결 → 위젯 열기
       window.$chatwoot.setUser(data.identifier, {
         name: customerName,
         identifier_hash: data.identifierHash,
@@ -41,6 +49,8 @@ export default function ConsultationForm() {
     }
   }
 
+  const isDisabled = status === "connected";
+
   return (
     <div className="space-y-4 max-w-md">
       <div>
@@ -51,7 +61,7 @@ export default function ConsultationForm() {
           onChange={(e) => setCustomerName(e.target.value)}
           placeholder="홍길동"
           className="w-full border rounded px-3 py-2"
-          disabled={status === "connected"}
+          disabled={isDisabled}
         />
       </div>
       <div>
@@ -62,12 +72,32 @@ export default function ConsultationForm() {
           onChange={(e) => setHospitalName(e.target.value)}
           placeholder="테스트병원"
           className="w-full border rounded px-3 py-2"
-          disabled={status === "connected"}
+          disabled={isDisabled}
         />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">문의 유형</label>
+        <div className="grid grid-cols-2 gap-2">
+          {INQUIRY_TYPES.map((type) => (
+            <button
+              key={type.value}
+              type="button"
+              onClick={() => setInquiryType(type.value)}
+              disabled={isDisabled}
+              className={`border rounded px-3 py-2 text-sm transition-colors ${
+                inquiryType === type.value
+                  ? "border-blue-600 bg-blue-50 text-blue-700 font-medium"
+                  : "border-gray-300 hover:border-blue-400"
+              }`}
+            >
+              {type.label}
+            </button>
+          ))}
+        </div>
       </div>
       <button
         onClick={handleConnect}
-        disabled={status === "loading" || status === "connected"}
+        disabled={!canConnect || status === "loading" || status === "connected"}
         className="w-full bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400"
       >
         {status === "loading" && "연결 중..."}
