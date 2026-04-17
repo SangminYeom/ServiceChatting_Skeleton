@@ -1,6 +1,6 @@
 # 개발 진행 현황
 
-> 마지막 업데이트: 2026-04-16
+> 마지막 업데이트: 2026-04-17
 
 ## 완료된 작업
 
@@ -40,9 +40,11 @@
 - [x] Task 2: API Route에 chatHistory 처리 추가 (2026-04-17)
 - [x] Task 3: 프론트엔드 — 테스트용 chatHistory 입력 추가 (2026-04-17)
 - [x] Task 1: DB 마이그레이션 — csat 컬럼 추가 (2026-04-17)
+- [x] Task 2: DB 함수 추가 — updateConsultationStatus, saveCSAT (2026-04-17)
+- [x] Task 1: 업무 시간 상태 API Route 추가 (2026-04-17)
+- [x] Task 2: ConsultationForm에 오프라인 UI 추가 (2026-04-17)
 - [ ] HMAC 인증 (Identity Validation) 추가
-- [ ] Webhook 수신 처리
-- [ ] 오프라인 모드
+- [x] Webhook 수신 처리 — conversation_created/resolved, csat_created 처리 (2026-04-17)
 
 ## 메모
 
