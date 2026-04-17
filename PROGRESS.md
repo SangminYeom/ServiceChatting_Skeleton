@@ -33,6 +33,7 @@
 
 ### 이후 단계 (테스트 환경 완료 후)
 
+- [x] Task 1: Chatwoot API 클라이언트에 addLabel 함수 추가 (2026-04-17)
 - [ ] HMAC 인증 (Identity Validation) 추가
 - [ ] 문의 유형 선택 UI
 - [ ] 챗봇 대화 맥락 전달 (Conversation Note)
