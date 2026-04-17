@@ -36,10 +36,13 @@
 - [x] Task 1: Chatwoot API 클라이언트에 addLabel 함수 추가 (2026-04-17)
 - [x] Task 2: API Route에 inquiryType 파라미터 추가 (2026-04-17)
 - [x] Task 3: 프론트엔드 — 문의 유형 선택 UI 추가 (2026-04-17)
+- [x] Task 1: Chatwoot API 클라이언트에 addConversationNote 함수 추가 (2026-04-17)
+- [x] Task 2: API Route에 chatHistory 처리 추가 (2026-04-17)
 - [ ] HMAC 인증 (Identity Validation) 추가
-- [ ] 챗봇 대화 맥락 전달 (Conversation Note)
 - [ ] Webhook 수신 처리
 - [ ] 오프라인 모드
+
+- [x] Task 2: API Route에 chatHistory 처리 추가 (2026-04-17)
 
 ## 메모
 
