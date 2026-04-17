@@ -43,24 +43,32 @@ export async function insertConsultationLog(
   };
 }
 
+export type ConsultationStatus = "requested" | "active" | "resolved";
+
 export async function updateConsultationStatus(
   chatwootConversationId: number,
-  status: string,
+  status: ConsultationStatus,
   resolvedAt?: Date
 ): Promise<void> {
   const sql = getDb();
+  let rows;
   if (resolvedAt) {
-    await sql`
+    rows = await sql`
       UPDATE consultation_logs
       SET status = ${status}, resolved_at = ${resolvedAt.toISOString()}
       WHERE chatwoot_conversation_id = ${chatwootConversationId}
+      RETURNING id
     `;
   } else {
-    await sql`
+    rows = await sql`
       UPDATE consultation_logs
       SET status = ${status}
       WHERE chatwoot_conversation_id = ${chatwootConversationId}
+      RETURNING id
     `;
+  }
+  if (rows.length === 0) {
+    console.warn(`updateConsultationStatus: no row for conversationId=${chatwootConversationId}`);
   }
 }
 
@@ -70,9 +78,13 @@ export async function saveCSAT(
   comment: string | null
 ): Promise<void> {
   const sql = getDb();
-  await sql`
+  const rows = await sql`
     UPDATE consultation_logs
     SET csat_rating = ${rating}, csat_comment = ${comment}
     WHERE chatwoot_conversation_id = ${chatwootConversationId}
+    RETURNING id
   `;
+  if (rows.length === 0) {
+    console.warn(`saveCSAT: no row for conversationId=${chatwootConversationId}`);
+  }
 }
