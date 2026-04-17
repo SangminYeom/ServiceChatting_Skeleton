@@ -42,10 +42,13 @@ export async function POST(request: NextRequest) {
     if (event === "conversation_created") {
       const conversationId = payload.id as number;
       await updateConsultationStatus(conversationId, "active");
-    } else if (event === "conversation_resolved") {
+    } else if (event === "conversation_status_changed") {
       const conversationId = payload.id as number;
-      await updateConsultationStatus(conversationId, "resolved", new Date());
-    } else if (event === "csat_created") {
+      const status = payload.status as string;
+      if (status === "resolved") {
+        await updateConsultationStatus(conversationId, "resolved", new Date());
+      }
+    } else if (event === "csat_survey_submitted") {
       const conversation = payload.conversation as { id: number };
       const rating = csatRatingToNumber(payload.rating as string);
       const comment = (payload.feedback_message as string | undefined) ?? null;
