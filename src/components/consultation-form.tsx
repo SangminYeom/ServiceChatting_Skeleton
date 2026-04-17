@@ -25,10 +25,14 @@ export default function ConsultationForm() {
   const [online, setOnline] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch("/api/consultation/status")
+    const controller = new AbortController();
+    fetch("/api/consultation/status", { signal: controller.signal })
       .then((res) => res.json())
       .then((data: { online: boolean }) => setOnline(data.online))
-      .catch(() => setOnline(true));
+      .catch((err) => {
+        if (err.name !== "AbortError") setOnline(true);
+      });
+    return () => controller.abort();
   }, []);
 
   const canConnect = customerName.trim() && hospitalName.trim() && inquiryType;
@@ -147,7 +151,8 @@ export default function ConsultationForm() {
         className="w-full bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 disabled:bg-gray-400"
       >
         {status === "loading" && "연결 중..."}
-        {status === "idle" && "상담사 연결"}
+        {status === "idle" && online === null && "상태 확인 중..."}
+        {status === "idle" && online !== null && "상담사 연결"}
         {status === "connected" && "상담 중"}
         {status === "error" && "다시 시도"}
       </button>
