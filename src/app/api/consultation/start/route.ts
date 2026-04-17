@@ -1,15 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac } from "crypto";
-import { createContact, createConversation, addLabel } from "@/lib/chatwoot-api";
+import { createContact, createConversation, addLabel, addConversationNote } from "@/lib/chatwoot-api";
 import { insertCustomer, insertConsultationLog } from "@/lib/db";
+
+type ChatMessage = {
+  role: "user" | "bot";
+  content: string;
+};
+
+function formatChatHistory(messages: ChatMessage[]): string {
+  const lines = messages.map((m) =>
+    m.role === "user" ? `사용자: ${m.content}` : `챗봇: ${m.content}`
+  );
+
+  const lastUserMessage = [...messages].reverse().find((m) => m.role === "user");
+
+  const parts = ["[챗봇 대화 내역]", "", ...lines];
+
+  if (lastUserMessage) {
+    parts.push("", "---", "📌 마지막 고객 문의:", `"${lastUserMessage.content}"`);
+  }
+
+  return parts.join("\n");
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { customerName, hospitalName, inquiryType } = body as {
+    const { customerName, hospitalName, inquiryType, chatHistory } = body as {
       customerName: string;
       hospitalName: string;
       inquiryType: string;
+      chatHistory?: ChatMessage[];
     };
 
     if (!customerName || !hospitalName || !inquiryType) {
@@ -26,6 +48,10 @@ export async function POST(request: NextRequest) {
     const conversation = await createConversation(contact.id, inboxId);
 
     await addLabel(conversation.id, [inquiryType]);
+
+    if (chatHistory && chatHistory.length > 0) {
+      await addConversationNote(conversation.id, formatChatHistory(chatHistory));
+    }
 
     const customer = await insertCustomer(customerName, hospitalName, contact.id);
     await insertConsultationLog(customer.id, conversation.id);
